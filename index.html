@@ -1679,6 +1679,44 @@ window.showToast = function(msg, isError = false) {
     if (e.target === this) this.classList.remove('open');
   });
 });
+  <script>
+/* chặn chuột phải */
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* chặn chọn chữ */
+document.addEventListener("selectstart", e => e.preventDefault());
+
+/* chặn kéo thả */
+document.addEventListener("dragstart", e => e.preventDefault());
+
+/* chặn phím phổ biến để mở devtools */
+document.addEventListener("keydown", function(e) {
+
+    if (e.key === "F12") {
+        e.preventDefault();
+    }
+
+    if (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) {
+        e.preventDefault();
+    }
+
+    if (e.ctrlKey && ["U","S"].includes(e.key)) {
+        e.preventDefault();
+    }
+
+});
+
+/* phát hiện devtools mở */
+setInterval(function() {
+    const widthThreshold = window.outerWidth - window.innerWidth > 160;
+    const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+    if (widthThreshold || heightThreshold) {
+        document.body.innerHTML = "";
+        location.reload();
+    }
+}, 1000);
+</script>
 </script>
 </body>
 </html>
