@@ -1681,4 +1681,72 @@ window.showToast = function(msg, isError = false) {
 });
 </script>
 </body>
+  <script>
+// chặn chuột phải
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// chặn copy
+document.addEventListener("copy", e => e.preventDefault());
+
+// chặn phím
+document.onkeydown = function(e) {
+
+  // F12
+  if (e.keyCode == 123) {
+    return false;
+  }
+
+  // Ctrl+Shift+I
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+    return false;
+  }
+
+  // Ctrl+Shift+J
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+    return false;
+  }
+
+  // Ctrl+Shift+C
+  if (e.ctrlKey && e.shiftKey && e.keyCode == 67) {
+    return false;
+  }
+
+  // Ctrl+U
+  if (e.ctrlKey && e.keyCode == 85) {
+    return false;
+  }
+
+  // Ctrl+S
+  if (e.ctrlKey && e.keyCode == 83) {
+    return false;
+  }
+
+};
+
+// phát hiện devtools
+setInterval(function() {
+
+  const widthThreshold = window.outerWidth - window.innerWidth > 160;
+  const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+  if (widthThreshold || heightThreshold) {
+
+    document.body.innerHTML = "DevTools bị chặn";
+    location.reload();
+
+  }
+
+}, 1000);
+
+// anti console
+(function(){
+  const devtools = /./;
+  devtools.toString = function(){
+    this.opened = true;
+  }
+
+  console.log(devtools);
+
+})();
+</script>
 </html>
